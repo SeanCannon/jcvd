@@ -1,0 +1,22 @@
+{
+  "name": "jcvd",
+  "version": "1.0.1",
+  "description": "Javascript Can Validate Data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seancannon/jcvd.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "tape": "^4.6.3"
+  },
+  "authors": [
+    "seancannon",
+    "jtremback"
+  ],
+  "license": "MIT"
+}

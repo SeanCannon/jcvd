@@ -85,3 +85,4 @@ isAwesomeCar({
 # CHANGELOG
  - 1.0.0 - initial commit
  - 1.0.1 - fork from nested-validate with latest improvements
+ - 1.0.2 - update tests

@@ -1,34 +1,37 @@
+'use strict';
+
 const test = require('tape');
+
 const {
-        isObjectOf,
+        isPartialObjectOf,
         isArrayOf,
         isOptional,
         isRequired,
         label,
         customErrors
-      }    = require('./index.js');
+      } = require('./index.js');
 
 const isString = isRequired(n => typeof n === 'string');
 const isNumber = isRequired(n => typeof n === 'number');
 
-const isAddress = isObjectOf({
+const isAddress = isPartialObjectOf({
   street      : isString,
   houseNumber : isNumber
 });
 
-const isMyType = isObjectOf({
+const isMyType = isPartialObjectOf({
   foo       : isOptional(isString),
   bar       : isNumber,
   arr       : isArrayOf(isNumber),
   addresses : isOptional(isArrayOf(isAddress))
 });
 
-const isMyOtherType = isObjectOf({
+const isMyOtherType = isPartialObjectOf({
   baz    : isString,
   myType : isMyType
 });
 
-const isMyErrorType = isObjectOf({
+const isMyErrorType = isPartialObjectOf({
   message : isString,
   code    : isNumber
 });
@@ -63,7 +66,6 @@ test('missing array', t => {
 
 test('wrong type', t => {
   t.plan(1);
-
   t.throws(() => {
     isMyOtherType({
       baz    : 'dop',
@@ -116,7 +118,7 @@ test('array of objects with wrong property', t => {
     isMyOtherType({
       baz    : 'dop',
       myType : {
-        foo       : 'derp',
+        //foo       : 'derp',
         bar       : 3,
         arr       : [3, 3],
         addresses : [
@@ -131,7 +133,7 @@ test('array of objects with wrong property', t => {
 });
 
 test('custom errors', t => {
-  t.plan(2);
+  t.plan(3);
   const {
           isObjectOf,
           isArrayOf,
@@ -142,13 +144,17 @@ test('custom errors', t => {
     },
     handleMissing : () => {
       return new Error('crap');
+    },
+    handleUnsupported : () => {
+      return new Error('doh');
     }
   });
 
   const isString = isRequired(n => typeof n === 'string');
 
   const isAwesomeCar = isObjectOf({
-    whales : isArrayOf(isString)
+    whales : isArrayOf(isString),
+    frond  : isString
   });
 
   t.throws(() => {
@@ -162,6 +168,14 @@ test('custom errors', t => {
       frond : 'gop'
     });
   }, /whales -> crap/);
+
+  t.throws(() => {
+    isAwesomeCar({
+      whales : ['beluga', 'sperm'],
+      frond  : 'gop',
+      foooo  : 'bar'
+    });
+  }, /foooo -> doh/);
 });
 
 test('throw on bad custom errors', t => {
@@ -186,7 +200,7 @@ test('throw on non-function predicate', t => {
     isArrayOf('foo');
   }, /predicate is not a function/);
   t.throws(() => {
-    isObjectOf({ bar : 'foo' });
+    isPartialObjectOf({ bar : 'foo' });
   }, /predicate for bar is not a function/);
 });
 
@@ -194,7 +208,7 @@ test('throw on non-array or non-object', t => {
   t.plan(2);
 
   t.throws(() => {
-    isObjectOf({ foo : isString })([]);
+    isPartialObjectOf({ foo : isString })([]);
   }, /invalid/);
   t.throws(() => {
     isArrayOf(isString)({});

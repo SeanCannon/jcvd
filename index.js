@@ -1,10 +1,12 @@
 let standardErrors = {
-  handleInvalid : () => new Error('invalid'),
-  handleMissing : () => new Error('missing')
+  handleInvalid     : () => new Error('invalid'),
+  handleMissing     : () => new Error('missing'),
+  handleUnsupported : () => new Error('unsupported')
 };
 
-const isObjectOf = errors => schema => {
-  Object.keys(schema).forEach(key => {
+const isObjectOf = strict => errors => schema => {
+  const schemaKeys = Object.keys(schema);
+  schemaKeys.forEach(key => {
     const predicate = schema[key];
     if (typeof predicate !== 'function') {
       throw new Error(`predicate for ${key} is not a function`);
@@ -18,7 +20,23 @@ const isObjectOf = errors => schema => {
       (Object.prototype.toString.call(obj) !== '[object Error]')) {
       throw errors.handleInvalid();
     }
-    Object.keys(schema).forEach(key => {
+    if (strict) {
+      Object.keys(obj).forEach(key => {
+        try {
+          if (!schemaKeys.includes(key)) {
+            throw errors.handleUnsupported();
+          }
+        } catch (err) {
+          const _err = new Error();
+
+          Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
+          _err.message = `${key} -> ${err.message}`;
+
+          throw _err;
+        }
+      });
+    }
+    schemaKeys.forEach(key => {
       const value     = obj[key];
       const predicate = schema[key];
       try {
@@ -118,23 +136,26 @@ const isFunction = isRequired(standardErrors)(a => {
   return true;
 });
 
-const isCustomErrors = isObjectOf(standardErrors)({
-  handleInvalid : isFunction,
-  handleMissing : isFunction
+const isCustomErrors = isObjectOf(false)(standardErrors)({
+  handleInvalid     : isFunction,
+  handleMissing     : isFunction,
+  handleUnsupported : isFunction
 });
 
 module.exports = {
-  isObjectOf   : isObjectOf(standardErrors),
-  isArrayOf    : isArrayOf(standardErrors),
-  isRequired   : isRequired(standardErrors),
+  isObjectOf        : isObjectOf(true)(standardErrors),
+  isPartialObjectOf : isObjectOf(false)(standardErrors),
+  isArrayOf         : isArrayOf(standardErrors),
+  isRequired        : isRequired(standardErrors),
   isOptional,
   label,
-  customErrors : (errors) => {
+  customErrors      : errors => {
     isCustomErrors(errors);
     return {
-      isObjectOf : isObjectOf(errors),
-      isArrayOf  : isArrayOf(errors),
-      isRequired : isRequired(errors),
+      isObjectOf        : isObjectOf(true)(errors),
+      isPartialObjectOf : isObjectOf(false)(errors),
+      isArrayOf         : isArrayOf(errors),
+      isRequired        : isRequired(errors),
       isOptional,
       label
     };

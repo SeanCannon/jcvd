@@ -84,7 +84,6 @@ test('missing optional', t => {
     isMyOtherType({
       baz    : 'dop',
       myType : {
-        // foo: 3,
         bar : 3,
         arr : [3, 3]
       }
@@ -98,7 +97,6 @@ test('array of objects', t => {
     isMyOtherType({
       baz    : 'dop',
       myType : {
-        // foo: 3,
         bar       : 3,
         arr       : [3, 3],
         addresses : [
@@ -118,7 +116,6 @@ test('array of objects with wrong property', t => {
     isMyOtherType({
       baz    : 'dop',
       myType : {
-        //foo       : 'derp',
         bar       : 3,
         arr       : [3, 3],
         addresses : [
@@ -223,7 +220,6 @@ test('label', t => {
       myType : {
         foo : '3',
         bar : 3
-        // arr: [3, 3]
       }
     });
   }, /myOtherType -> myType -> arr -> missing/);

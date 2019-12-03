@@ -82,6 +82,7 @@ const isArrayOf = errors => predicate => {
         throw _err;
       }
     });
+    return true;
   };
 };
 

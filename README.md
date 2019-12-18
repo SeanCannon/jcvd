@@ -1,7 +1,12 @@
-# JCVC
+# JCVD
+### Javascript Can Validate Data
 
-This package is forked from [nested-validate](https://github.com/jtremback/nested-validate). 
-It lets you validate nested types at runtime, giving you error messages showing the path of the property that had the error. Build up the types using predicates like those found in [check-types](https://www.npmjs.com/package/check-types) or [prettycats](https://www.npmjs.com/package/prettycats). You can also create your own predicates.
+![GitHub Logo](/jcvd.png)
+
+This package lets you validate nested types at runtime, giving you error messages showing the path of the 
+property that had the error. Build up the types using predicates like those found 
+in [check-types](https://www.npmjs.com/package/check-types) 
+or [prettycats](https://www.npmjs.com/package/prettycats). You can also create your own predicates.
 
 ```js
 const {
@@ -87,3 +92,4 @@ isAwesomeCar({
  - 1.0.1 - fork from nested-validate with latest improvements
  - 1.0.2 - update tests
  - 1.0.3 - return true for passing isArrayOf
+ - 1.0.4 - update readme

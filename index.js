@@ -104,7 +104,7 @@ const isOptional = predicate => {
     throw new Error('predicate is not a function');
   }
   return value => {
-    if (value === undefined) {
+    if (typeof value === 'undefined' || value === null) {
       return true;
     } else {
       return predicate(value);

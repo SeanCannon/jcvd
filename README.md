@@ -93,3 +93,4 @@ isAwesomeCar({
  - 1.0.2 - update tests
  - 1.0.3 - return true for passing isArrayOf
  - 1.0.4 - update readme
+ - 1.0.5 - make isOptional consider both null and undefined as missing

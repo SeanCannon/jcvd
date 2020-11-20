@@ -94,3 +94,4 @@ isAwesomeCar({
  - 1.0.3 - return true for passing isArrayOf
  - 1.0.4 - update readme
  - 1.0.5 - make isOptional consider both null and undefined as missing
+ - 1.1.0 - label now returns value instead of true for tap flow

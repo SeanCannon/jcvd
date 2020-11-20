@@ -1,6 +1,6 @@
 {
   "name": "jcvd",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Javascript Can Validate Data",
   "repository": {
     "type": "git",
@@ -15,8 +15,7 @@
     "tape": "^4.6.3"
   },
   "authors": [
-    "seancannon",
-    "jtremback"
+    "seancannon"
   ],
   "license": "MIT"
 }

@@ -118,7 +118,7 @@ const label = (label, predicate) => {
   }
   return value => {
     try {
-      return predicate(value);
+      return predicate(value) ? value : false;
     } catch (err) {
       const _err = new Error();
 

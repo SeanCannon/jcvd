@@ -225,6 +225,19 @@ test('label', t => {
   }, /myOtherType -> myType -> arr -> missing/);
 });
 
+test('label', t => {
+  const value = {
+    baz    : 'dop',
+    myType : {
+      foo : '3',
+      bar : 3,
+      arr : [3, 3]
+    }
+  };
+
+  t.plan(1);
+  t.equal(label('myOtherType', isMyOtherType)(value), value);
+});
 
 test('happy path validating error', t => {
   t.plan(1);

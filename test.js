@@ -132,9 +132,9 @@ test('array of objects with wrong property', t => {
 test('custom errors', t => {
   t.plan(3);
   const {
-          isObjectOf,
-          isArrayOf,
-          isRequired
+          isObjectOf : _isObjectOf,
+          isArrayOf  : _isArrayOf,
+          isRequired : _isRequired
         } = customErrors({
     handleInvalid : () => {
       return new Error('dang');
@@ -147,11 +147,11 @@ test('custom errors', t => {
     }
   });
 
-  const isString = isRequired(n => typeof n === 'string');
+  const _isString = _isRequired(n => typeof n === 'string');
 
-  const isAwesomeCar = isObjectOf({
-    whales : isArrayOf(isString),
-    frond  : isString
+  const isAwesomeCar = _isObjectOf({
+    whales : _isArrayOf(_isString),
+    frond  : _isString
   });
 
   t.throws(() => {

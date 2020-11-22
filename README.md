@@ -95,3 +95,4 @@ isAwesomeCar({
  - 1.0.4 - update readme
  - 1.0.5 - make isOptional consider both null and undefined as missing
  - 1.1.0 - label now returns value instead of true for tap flow
+ - 1.1.1 - clean code semantics

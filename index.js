@@ -112,7 +112,7 @@ const isOptional = predicate => {
   };
 };
 
-const label = (label, predicate) => {
+const label = (_label, predicate) => {
   if (typeof predicate !== 'function') {
     throw new Error('predicate is not a function');
   }
@@ -123,7 +123,7 @@ const label = (label, predicate) => {
       const _err = new Error();
 
       Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
-      _err.message = `${label} -> ${err.message}`;
+      _err.message = `${_label} -> ${err.message}`;
 
       throw _err;
     }

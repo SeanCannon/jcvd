@@ -29,7 +29,7 @@ const isObjectOf = strict => errors => schema => {
         } catch (err) {
           const _err = new Error();
 
-          Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
+          Object.getOwnPropertyNames(err).forEach(k => _err[k] = err[k]);
           _err.message = `${key} -> ${err.message}`;
 
           throw _err;
@@ -46,7 +46,7 @@ const isObjectOf = strict => errors => schema => {
       } catch (err) {
         const _err = new Error();
 
-        Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
+        Object.getOwnPropertyNames(err).forEach(k => _err[k] = err[k]);
         _err.message = `${key} -> ${err.message}`;
 
         throw _err;
@@ -76,7 +76,7 @@ const isArrayOf = errors => predicate => {
       } catch (err) {
         const _err = new Error();
 
-        Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
+        Object.getOwnPropertyNames(err).forEach(k => _err[k] = err[k]);
         _err.message = `[${i}] -> ${err.message}`;
 
         throw _err;
@@ -122,7 +122,7 @@ const label = (_label, predicate) => {
     } catch (err) {
       const _err = new Error();
 
-      Object.getOwnPropertyNames(err).map(k => _err[k] = err[k]);
+      Object.getOwnPropertyNames(err).forEach(k => _err[k] = err[k]);
       _err.message = `${_label} -> ${err.message}`;
 
       throw _err;

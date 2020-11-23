@@ -89,10 +89,11 @@ isAwesomeCar({
 
 # CHANGELOG
  - 1.0.0 - initial commit
- - 1.0.1 - fork from nested-validate with latest improvements
+ - 1.0.1 - fork from nested-validate with the latest improvements
  - 1.0.2 - update tests
  - 1.0.3 - return true for passing isArrayOf
  - 1.0.4 - update readme
  - 1.0.5 - make isOptional consider both null and undefined as missing
  - 1.1.0 - label now returns value instead of true for tap flow
  - 1.1.1 - clean code semantics
+ - 1.1.2 - change map to forEach in getOwnPropertyNames

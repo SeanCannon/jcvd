@@ -14,7 +14,7 @@ const {
         isArrayOf,
         isOptional,
         isRequired
-      } = require('nested-validate');
+      } = require('jcvd');
 
 const isString = isRequired(n => typeof n === 'string');
 const isNumber = isRequired(n => typeof n === 'number');
@@ -97,3 +97,4 @@ isAwesomeCar({
  - 1.1.0 - label now returns value instead of true for tap flow
  - 1.1.1 - clean code semantics
  - 1.1.2 - change map to forEach in getOwnPropertyNames
+ - 1.1.3 - update readme

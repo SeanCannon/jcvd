@@ -98,3 +98,4 @@ isAwesomeCar({
  - 1.1.1 - clean code semantics
  - 1.1.2 - change map to forEach in getOwnPropertyNames
  - 1.1.3 - update readme
+ - 1.1.4 - make isRequired consider both null and undefined as missing

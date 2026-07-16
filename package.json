@@ -21,7 +21,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test spec/"
+    "test": "npm run build && node --test spec/test.js"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

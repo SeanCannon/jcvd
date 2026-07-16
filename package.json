@@ -1,18 +1,30 @@
 {
   "name": "jcvd",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "description": "Javascript Can Validate Data",
   "repository": {
     "type": "git",
     "url": "https://github.com/seancannon/jcvd.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "test": "node test.js"
+    "build": "tsc",
+    "test": "npm run build && node --test spec/test.js"
   },
   "devDependencies": {
-    "eslint": "^4.18.2",
-    "tape": "^4.6.3"
+    "typescript": "^5.9.3"
   },
   "authors": [
     "seancannon"

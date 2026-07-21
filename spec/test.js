@@ -11,7 +11,7 @@ const {
   isRequired,
   label,
   customErrors,
-} = require('../dist/index.js');
+} = require('../dist/cjs/index.js');
 
 const isString = isRequired(n => typeof n === 'string');
 const isNumber = isRequired(n => typeof n === 'number');

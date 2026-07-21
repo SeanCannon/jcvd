@@ -43,6 +43,12 @@ isMyType({
 // Throws: 'addresses [0] houseNumber invalid'
 ```
 
+JCVD ships both a CommonJS and an ES module build, so `import` works too:
+
+```js
+import { isObjectOf, isArrayOf, isOptional, isRequired } from 'jcvd';
+```
+
 # Interface
 
 - [Schema Validators](#schema-validators)

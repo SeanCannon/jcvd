@@ -1,18 +1,20 @@
 {
   "name": "jcvd",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Javascript Can Validate Data",
   "repository": {
     "type": "git",
     "url": "https://github.com/seancannon/jcvd.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
     }
   },
   "files": [
@@ -20,8 +22,12 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsc",
-    "test": "npm run build && node --test spec/test.js"
+    "build": "npm run build:cjs && npm run build:esm && npm run build:pkgjson",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:pkgjson": "node scripts/write-pkg-json.js",
+    "test": "npm run build && node --test spec/test.js && npm run test:dual-package",
+    "test:dual-package": "node scripts/verify-dual-package.js"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
